@@ -7,13 +7,13 @@ if sys.version_info < (2, 7):
 else:
     import json
 
-ADDON      = xbmcaddon.Addon()
-ADDONNAME  = ADDON.getAddonInfo('name')
-ADDONID    = ADDON.getAddonInfo('id')
-CWD        = ADDON.getAddonInfo('path').decode("utf-8")
-ADDONVERSION    = ADDON.getAddonInfo('version')
-LANGUAGE   = ADDON.getLocalizedString
-RESOURCE   = xbmc.translatePath( os.path.join( CWD, 'resources', 'lib' ).encode("utf-8") ).decode("utf-8")
+ADDON        = xbmcaddon.Addon()
+ADDONNAME    = ADDON.getAddonInfo('name')
+ADDONID      = ADDON.getAddonInfo('id')
+CWD          = ADDON.getAddonInfo('path').decode("utf-8")
+ADDONVERSION = ADDON.getAddonInfo('version')
+LANGUAGE     = ADDON.getLocalizedString
+RESOURCE     = xbmc.translatePath( os.path.join( CWD, 'resources', 'lib' ).encode("utf-8") ).decode("utf-8")
 
 sys.path.append(RESOURCE)
 
