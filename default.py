@@ -28,7 +28,7 @@ MAP            = ADDON.getSetting('Map')
 WEATHER_ICON   = xbmc.translatePath('%s.png').decode("utf-8")
 DATEFORMAT     = xbmc.getRegion('dateshort')
 TIMEFORMAT     = xbmc.getRegion('meridiem')
-LANGUAGE       = xbmc.getLanguage().lower()
+KODILANGUAGE   = xbmc.getLanguage().lower()
 MAXDAYS        = 6
 
 
@@ -173,7 +173,7 @@ def forecast(loc,locid,locationdeg):
             set_property('Map.%i.Heading' % count, '')
             set_property('Map.%i.Legend' % count, '')
     try:
-        lang = LANG[LANGUAGE]
+        lang = LANG[KODILANGUAGE]
         if lang == '':
             lang = 'en'
     except:
