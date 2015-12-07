@@ -1,3 +1,9 @@
+v4.0.1
+- fix calculation of feelslike temperature
+
+v4.0.0
+- remove simplejson support
+
 v3.1.3
 - language update
 - cosmetics

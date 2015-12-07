@@ -2,10 +2,7 @@
 
 import os, sys, time, urllib2, unicodedata
 import xbmc, xbmcgui, xbmcaddon
-if sys.version_info < (2, 7):
-    import simplejson as json
-else:
-    import json
+import json
 
 ADDON        = xbmcaddon.Addon()
 ADDONNAME    = ADDON.getAddonInfo('name')
@@ -254,7 +251,7 @@ def station_props(data,loc):
     if data.has_key('last') and data['last'].has_key('wind') and data['last']['wind'].has_key('deg'):
         set_property('Current.WindDirection'    , xbmc.getLocalizedString(WIND_DIR(int(round(data['last']['wind']['deg'])))))
     try:
-        set_property('Current.FeelsLike'        , FEELS_LIKE(data['last']['main']['temp'] -273, data['last']['wind']['speed'], False)) # api values are in K
+        set_property('Current.FeelsLike'        , FEELS_LIKE(data['last']['main']['temp'] -273, data['last']['wind']['speed'] * 3.6, data['last']['main']['humidity'], False)) # api values are in K
     except:
         pass
     if data.has_key('last') and data['last'].has_key('calc') and data['last']['calc'].has_key('dewpoint'):
@@ -300,7 +297,7 @@ def current_props(data,loc):
     if data['wind'].has_key('speed'):
         set_property('Current.Wind'             , str(int(round(data['wind']['speed'] * 3.6))))
         if data['main'].has_key('temp'):
-            set_property('Current.FeelsLike'    , FEELS_LIKE(data['main']['temp'], data['wind']['speed'], False))
+            set_property('Current.FeelsLike'    , FEELS_LIKE(data['main']['temp'], data['wind']['speed'] * 3.6, data['main']['humidity'], False))
         else:
             set_property('Current.FeelsLike'    , '')
     else:
@@ -408,8 +405,14 @@ def current_props(data,loc):
     set_property('Forecast.Latitude'            , str(data['coord']['lat']))
     set_property('Forecast.Longitude'           , str(data['coord']['lon']))
     set_property('Forecast.Updated'             , convert_date(data['dt']))
-    set_property('Today.Sunrise'                , convert_date(data['sys']['sunrise']).split('  ')[0])
-    set_property('Today.Sunset'                 , convert_date(data['sys']['sunset']).split('  ')[0])
+    try:
+        set_property('Today.Sunrise'            , convert_date(data['sys']['sunrise']).split('  ')[0])
+    except:
+        set_property('Today.Sunrise'            , '')
+    try:
+        set_property('Today.Sunset'             , convert_date(data['sys']['sunset']).split('  ')[0])
+    except:
+        set_property('Today.Sunset'            , '')
 
 def daily_props(data):
 # standard properties
@@ -455,7 +458,7 @@ def daily_props(data):
         set_property('Daily.%i.TempNight'       % (count+1), TEMP(item['temp']['night']) + TEMPUNIT)
         set_property('Daily.%i.HighTemperature' % (count+1), TEMP(item['temp']['max']) + TEMPUNIT)
         set_property('Daily.%i.LowTemperature'  % (count+1), TEMP(item['temp']['min']) + TEMPUNIT)
-        set_property('Daily.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed']) + TEMPUNIT)
+        set_property('Daily.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed'] * 3.6, item['humidity']) + TEMPUNIT)
         set_property('Daily.%i.DewPoint'        % (count+1), DEW_POINT(item['temp']['day'], item['humidity']) + TEMPUNIT)
         if 'F' in TEMPUNIT:
             set_property('Daily.%i.Pressure'        % (count+1), str(round(item['pressure'] / 33.86 ,2)) + ' in')
@@ -532,7 +535,7 @@ def daily_props(data):
             set_property('Weekend.%i.HighTemperature' % (count+1), TEMP(item['temp']['max']) + TEMPUNIT)
             set_property('Weekend.%i.LowTemperature'  % (count+1), TEMP(item['temp']['min']) + TEMPUNIT)
             set_property('Weekend.%i.DewPoint'        % (count+1), DEW_POINT(item['temp']['day'], item['humidity']) + TEMPUNIT)
-            set_property('Weekend.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed']) + TEMPUNIT)
+            set_property('Weekend.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed'] * 3.6, item['humidity']) + TEMPUNIT)
             if 'F' in TEMPUNIT:
                 set_property('Weekend.%i.Pressure'        % (count+1), str(round(item['pressure'] / 33.86 ,2)) + ' in')
                 rain = 0
@@ -600,7 +603,7 @@ def daily_props(data):
         set_property('36Hour.%i.Temperature'     % (count+1), TEMP(item['temp']['day']) + TEMPUNIT)
         set_property('36Hour.%i.HighTemperature' % (count+1), TEMP(item['temp']['max']) + TEMPUNIT)
         set_property('36Hour.%i.LowTemperature'  % (count+1), TEMP(item['temp']['min']) + TEMPUNIT)
-        set_property('36Hour.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed']) + TEMPUNIT)
+        set_property('36Hour.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['temp']['day'], item['speed'] * 3.6, item['humidity']) + TEMPUNIT)
         set_property('36Hour.%i.DewPoint'        % (count+1), DEW_POINT(item['temp']['day'], item['humidity']) + TEMPUNIT)
         if 'F' in TEMPUNIT:
             set_property('36Hour.%i.Pressure'        % (count+1), str(round(item['pressure'] / 33.86 ,2)) + ' in')
@@ -683,7 +686,7 @@ def hourly_props(data, daynum):
         set_property('Hourly.%i.DewPoint'            % (count+1), DEW_POINT(item['main']['temp'], item['main']['humidity']) + TEMPUNIT)
         if item['wind'].has_key('speed'):
             set_property('Hourly.%i.WindSpeed'       % (count+1), SPEED(item['wind']['speed']) + SPEEDUNIT)
-            set_property('Hourly.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['main']['temp'], item['wind']['speed']) + TEMPUNIT)
+            set_property('Hourly.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['main']['temp'], item['wind']['speed'] * 3.6, item['main']['humidity']) + TEMPUNIT)
         else:
             set_property('Hourly.%i.WindSpeed'       % (count+1), '')
             set_property('Hourly.%i.FeelsLike'       % (count+1), '')
@@ -778,7 +781,7 @@ def hourly_props(data, daynum):
                     set_property('36Hour.%i.WindDegree'      % (count+1), '')
                 if item['wind'].has_key('speed'):
                     set_property('36Hour.%i.WindSpeed'       % (count+1), SPEED(item['wind']['speed']) + SPEEDUNIT)
-                    set_property('36Hour.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['main']['temp'], item['wind']['speed']) + TEMPUNIT)
+                    set_property('36Hour.%i.FeelsLike'       % (count+1), FEELS_LIKE(item['main']['temp'], item['wind']['speed'] * 3.6, item['main']['humidity']) + TEMPUNIT)
                 else:
                     set_property('36Hour.%i.WindSpeed'       % (count+1), '')
                     set_property('36Hour.%i.FeelsLike'       % (count+1), '')
