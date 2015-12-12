@@ -305,6 +305,7 @@ def current_props(data,loc):
             set_property('Current.FeelsLike'    , '')
     else:
         set_property('Current.Wind'             , '')
+        set_property('Current.FeelsLike'        , '')
     if data['wind'].has_key('deg'):
         set_property('Current.WindDirection'    , xbmc.getLocalizedString(WIND_DIR(int(round(data['wind']['deg'])))))
     else:
