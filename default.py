@@ -72,6 +72,8 @@ def get_data(search_string):
     return response
 
 def convert_date(stamp):
+    if str(stamp).startswith('-'):
+        return ''
     date_time = time.localtime(stamp)
     if DATEFORMAT[1] == 'd' or DATEFORMAT[0] == 'D':
         localdate = time.strftime('%d-%m-%Y', date_time)
