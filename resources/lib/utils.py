@@ -3,13 +3,26 @@
 import math
 import xbmc, xbmcgui, xbmcaddon
 
-ADDON      = xbmcaddon.Addon('weather.openweathermap.extended')
+ADDON      = xbmcaddon.Addon()
 ADDONID    = ADDON.getAddonInfo('id')
 
 WEATHER_WINDOW = xbmcgui.Window(12600)
 DEBUG          = ADDON.getSetting('Debug')
 TEMPUNIT       = unicode(xbmc.getRegion('tempunit'),encoding='utf-8')
 SPEEDUNIT      = xbmc.getRegion('speedunit')
+
+KEYS = ['29debf8ecccdfc889f537bdbde2c501b',
+        '0b2385d88ef95211eb77f26c5834f478',
+        '9da5a93cf7e25be545bfe6fec77f460c',
+        '59e1ae5d40fd7accbc8e318d65a85db6',
+        '5a06fb033042b1cb22f92b601a357411',
+        '84dcff1f59d58371736a68855c2b2d58',
+        '598d2a90eaee5b28e823ceac4f9fdefa',
+        'e77b395b043427f4cad175c86d061c7f',
+        '2e310a089f91643cc8a34377464c42b9',
+        'b523667fdd91b8a355ed06e084dbbd97',
+        'db6d2ac35c91286eb1a3e7aa7f9a8b29',
+        '49bd49b8540ff01523b86b4b1580a884']
 
 
 def log(txt):

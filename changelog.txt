@@ -1,3 +1,7 @@
+v3.2.0
+- add option for personal api key
+- add caching
+
 v3.1.5
 - fix feelslike temprature calculation
 
