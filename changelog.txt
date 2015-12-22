@@ -1,3 +1,7 @@
+v4.1.0
+- add api key option
+- add caching
+
 v4.0.1
 - fix calculation of feelslike temperature
 
