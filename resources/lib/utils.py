@@ -22,7 +22,10 @@ KEYS = ['29debf8ecccdfc889f537bdbde2c501b',
         '2e310a089f91643cc8a34377464c42b9',
         'b523667fdd91b8a355ed06e084dbbd97',
         'db6d2ac35c91286eb1a3e7aa7f9a8b29',
-        '49bd49b8540ff01523b86b4b1580a884']
+        '49bd49b8540ff01523b86b4b1580a884',
+        '03238567f74d49ca27a6eeed2bbf89e8',
+        '26b859e2234626fb3c5a80b3744527b7',
+        'f1ecc83a4df5341c8783f44c4f1f1ed3']
 
 
 def log(txt):
