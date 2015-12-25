@@ -2,7 +2,7 @@
 <addon id="weather.openweathermap.extended" name="OpenWeatherMap Extended" version="4.1.0" provider-name="ronie">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0"/>
-		<import addon="script.openweathermap.maps" version="1.0.0"/>
+		<import addon="script.openweathermap.maps" version="0.0.12"/>
 	</requires>
 	<extension point="xbmc.python.weather" library="default.py"/>
 	<extension point="xbmc.addon.metadata">
