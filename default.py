@@ -443,7 +443,7 @@ def daily_props(data):
         if icon.endswith('n'):
             code = code + 'n'
         weathercode = WEATHER_CODES[code]
-        set_property('Day%i.Title'              % count, get_weekday(item['dt'], 's'))
+        set_property('Day%i.Title'              % count, get_weekday(item['dt'], 'l'))
         set_property('Day%i.HighTemp'           % count, str(int(round(item['temp']['max']))))
         set_property('Day%i.LowTemp'            % count, str(int(round(item['temp']['min']))))
         set_property('Day%i.Outlook'            % count, CAPITALIZE(item['weather'][0]['description']))
