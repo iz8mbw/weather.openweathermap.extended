@@ -151,7 +151,7 @@ def location(string):
     if data != '' and 'list' in data:
         for item in data['list']:
             if item['name'] == '': # bug? test by searching for california
-                location = UPPERCASE(string)
+                location = string.title()
             else:
                 location   = item['name']
             locationid = item['id']
@@ -309,7 +309,7 @@ def current_props(data,loc):
         code = code + 'n'
     weathercode = WEATHER_CODES[code]
     set_property('Current.Location'             , loc)
-    set_property('Current.Condition'            , CAPITALIZE(data['weather'][0].get('description','')))
+    set_property('Current.Condition'            , data['weather'][0].get('description','').capitalize())
     if 'temp' in data['main']:
         set_property('Current.Temperature'      , str(int(round(data['main']['temp']))))
         set_property('Current.DewPoint'         , DEW_POINT(data['main']['temp'], data['main']['humidity'], False))
@@ -437,7 +437,7 @@ def daily_props(data):
         set_property('Day%i.Title'              % count, get_weekday(item.get('dt',''), 'l'))
         set_property('Day%i.HighTemp'           % count, str(int(round(item['temp']['max']))))
         set_property('Day%i.LowTemp'            % count, str(int(round(item['temp']['min']))))
-        set_property('Day%i.Outlook'            % count, CAPITALIZE(item['weather'][0].get('description','')))
+        set_property('Day%i.Outlook'            % count, item['weather'][0].get('description','').capitalize())
         set_property('Day%i.OutlookIcon'        % count, '%s.png' % weathercode)
         set_property('Day%i.FanartCode'         % count, weathercode)
         if count == MAXDAYS:
@@ -457,7 +457,7 @@ def daily_props(data):
         else:
             set_property('Daily.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('Daily.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('Daily.%i.Outlook'         % (count+1), CAPITALIZE(item['weather'][0].get('description','')))
+        set_property('Daily.%i.Outlook'         % (count+1), item['weather'][0].get('description','').capitalize())
         set_property('Daily.%i.ShortOutlook'    % (count+1), item['weather'][0].get('main',''))
         set_property('Daily.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('Daily.%i.FanartCode'      % (count+1), weathercode)
@@ -532,7 +532,7 @@ def daily_props(data):
             else:
                 set_property('Weekend.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
                 set_property('Weekend.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-            set_property('Weekend.%i.Outlook'         % (count+1), CAPITALIZE(item['weather'][0].get('description','')))
+            set_property('Weekend.%i.Outlook'         % (count+1), item['weather'][0].get('description','').capitalize())
             set_property('Weekend.%i.ShortOutlook'    % (count+1), item['weather'][0].get('main',''))
             set_property('Weekend.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
             set_property('Weekend.%i.FanartCode'      % (count+1), weathercode)
@@ -605,7 +605,7 @@ def daily_props(data):
         else:
             set_property('36Hour.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('36Hour.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('36Hour.%i.Outlook'         % (count+1), CAPITALIZE(item['weather'][0].get('description','')))
+        set_property('36Hour.%i.Outlook'         % (count+1), item['weather'][0].get('description','').capitalize())
         set_property('36Hour.%i.ShortOutlook'    % (count+1), item['weather'][0].get('main',''))
         set_property('36Hour.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('36Hour.%i.FanartCode'      % (count+1), weathercode)
@@ -680,7 +680,7 @@ def hourly_props(data, daynum):
         else:
             set_property('Hourly.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('Hourly.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('Hourly.%i.Outlook'         % (count+1), CAPITALIZE(item['weather'][0].get('description','')))
+        set_property('Hourly.%i.Outlook'         % (count+1), item['weather'][0].get('description','').capitalize())
         set_property('Hourly.%i.ShortOutlook'    % (count+1), item['weather'][0].get('main',''))
         set_property('Hourly.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('Hourly.%i.FanartCode'      % (count+1), weathercode)
@@ -776,7 +776,7 @@ def hourly_props(data, daynum):
                 else:
                     set_property('36Hour.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
                     set_property('36Hour.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-                set_property('36Hour.%i.Outlook'         % (count+1), CAPITALIZE(item['weather'][0].get('description','')))
+                set_property('36Hour.%i.Outlook'         % (count+1), item['weather'][0].get('description','').capitalize())
                 set_property('36Hour.%i.ShortOutlook'    % (count+1), item['weather'][0].get('main',''))
                 set_property('36Hour.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
                 set_property('36Hour.%i.FanartCode'      % (count+1), weathercode)
