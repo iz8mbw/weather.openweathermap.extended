@@ -304,6 +304,83 @@ WEEK_DAY_SHORT = { '0' : 47,
                    '5' : 45,
                    '6' : 46 }
 
+FORECAST = { 'Thunderstorm with light rain': '32201',
+             'Thunderstorm with rain': '32202',
+             'Thunderstorm with heavy rain': '32203',
+             'Light thunderstorm': '32204',
+             'Thunderstorm': '32205',
+             'Heavy thunderstorm': '32206',
+             'Ragged thunderstorm': '32207',
+             'Thunderstorm with light drizzle': '32208',
+             'Thunderstorm with drizzle': '32209',
+             'Thunderstorm with heavy drizzle': '32210',
+             'Light intensity drizzle': '32211',
+             'Drizzle': '32212',
+             'Heavy intensity drizzle': '32213',
+             'Light intensity drizzle rain': '32214',
+             'Drizzle rain': '32215',
+             'Heavy intensity drizzle rain': '32216',
+             'Shower rain and drizzle': '32217',
+             'Heavy shower rain and drizzle': '32218',
+             'Shower drizzle': '32219',
+             'Light rain': '32220',
+             'Moderate rain': '32221',
+             'Heavy intensity rain': '32222',
+             'Very heavy rain': '32223',
+             'Extreme rain': '32224',
+             'Freezing rain': '32225',
+             'Light intensity shower rain': '32226',
+             'Shower rain': '32227',
+             'Heavy intensity shower rain': '32228',
+             'Ragged shower rain': '32229',
+             'Light snow': '32230',
+             'Snow': '32231',
+             'Heavy snow': '32232',
+             'Sleet': '32233',
+             'Shower sleet': '32234',
+             'Light rain and snow': '32235',
+             'Rain and snow': '32236',
+             'Light shower snow': '32237',
+             'Shower snow': '32238',
+             'Heavy shower snow': '32239',
+             'Mist': '32240',
+             'Smoke': '32241',
+             'Haze': '32242',
+             'Sand,dust whirls': '32243',
+             'Fog': '32244',
+             'Sand': '32245',
+             'Dust': '32246',
+             'Volcanic ash': '32247',
+             'Squalls': '32248',
+             'Tornado': '32249',
+             'Clear sky': '32250',
+             'Few clouds': '32251',
+             'Scattered clouds': '32252',
+             'Broken clouds': '32253',
+             'Overcast clouds': '32254',
+             'Tornado': '32255',
+             'Tropical storm': '32256',
+             'Hurricane': '32257',
+             'Cold': '32258',
+             'Hot': '32259',
+             'Windy': '32260',
+             'Hail': '32261',
+             'Calm': '32262',
+             'Light breeze': '32263',
+             'Gentle breeze': '32264',
+             'Moderate breeze': '32265',
+             'Fresh breeze': '32266',
+             'Strong breeze': '32267',
+             'High wind,near gale': '32268',
+             'Gale': '32269',
+             'Severe gale': '32270',
+             'Storm': '32271',
+             'Violent storm': '32272',
+             'Hurricane': '32273',
+             'Clear': '32274',
+             'Clouds': '32275',
+             'Rain': '32276'}
+
 def SPEED(mps):
     if SPEEDUNIT == 'km/h':
         speed = mps * 3.6
@@ -452,15 +529,3 @@ def DEW_POINT(Tc=0, RH=93, minRH=( 0, 0.075 )[ 0 ], ext=True):
         return TEMP( DewPoint )
     else:
         return str(int(round(DewPoint)))
-
-def CAPITALIZE(string):
-    string = string[0].upper() + string[1:]
-    return string
-
-def UPPERCASE(string):
-    words = []
-    for word in string.split(' '):
-        word = word[0].upper() + word[1:]
-        words.append(word)
-    string = ' '.join(words)
-    return string
