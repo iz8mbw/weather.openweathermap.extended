@@ -1,3 +1,6 @@
+v3.2.3
+- add forecast strings to language file
+
 v3.2.2
 - use longday format for Day%i.Title
 
