@@ -1,6 +1,10 @@
 v4.0.0
 - remove simplejson support
 
+v3.2.4
+- fix capitalization
+- fix dewpoint calculation
+
 v3.2.3
 - add forecast strings to language file
 
