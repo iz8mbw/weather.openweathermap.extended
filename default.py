@@ -309,7 +309,7 @@ def current_props(data,loc):
         code = code + 'n'
     weathercode = WEATHER_CODES[code]
     set_property('Current.Location'             , loc)
-    set_property('Current.Condition'            , string.capwords(data['weather'][0].get('description','')))
+    set_property('Current.Condition'            , FORECAST.get(data['weather'][0].get('description',''), data['weather'][0].get('description','')))
     if 'temp' in data['main']:
         set_property('Current.Temperature'      , str(int(round(data['main']['temp']))))
         set_property('Current.DewPoint'         , DEW_POINT(data['main']['temp'], data['main']['humidity'], False))
@@ -337,7 +337,7 @@ def current_props(data,loc):
     set_property('Updated'                      , convert_date(data.get('dt','')))
 # extended properties
     set_property('Current.Cloudiness'           , str(data['clouds'].get('all','')) + '%')
-    set_property('Current.ShortOutlook'         , string.capwords(FORECAST.get(data['weather'][0].get('main','')), string.capwords(data['weather'][0].get('main',''))))
+    set_property('Current.ShortOutlook'         , FORECAST.get(data['weather'][0].get('main',''), data['weather'][0].get('main','')))
     if 'temp_min' in data['main']:
         set_property('Current.LowTemperature'   , TEMP(data['main']['temp_min']) + TEMPUNIT)
     else:
@@ -378,8 +378,8 @@ def current_props(data,loc):
         set_property('Current.Precipitation'    , str(round(precip *  0.04 ,2)) + ' in')
     else:
         set_property('Current.Pressure'         , str(data['main'].get('pressure','')) + ' mb')
-        set_property('Current.SeaLevel'     , str(data['main'].get('sea_level','')) + ' mb')
-        set_property('Current.GroundLevel'  , str(data['main'].get('grnd_level','')) + ' mb')
+        set_property('Current.SeaLevel'         , str(data['main'].get('sea_level','')) + ' mb')
+        set_property('Current.GroundLevel'      , str(data['main'].get('grnd_level','')) + ' mb')
         rain = 0
         snow = 0
         if 'rain' in data:
@@ -437,7 +437,7 @@ def daily_props(data):
         set_property('Day%i.Title'              % count, get_weekday(item.get('dt',''), 'l'))
         set_property('Day%i.HighTemp'           % count, str(int(round(item['temp']['max']))))
         set_property('Day%i.LowTemp'            % count, str(int(round(item['temp']['min']))))
-        set_property('Day%i.Outlook'            % count, string.capwords(item['weather'][0].get('description','')))
+        set_property('Day%i.Outlook'            % count, item['weather'][0].get('description',''))
         set_property('Day%i.OutlookIcon'        % count, '%s.png' % weathercode)
         set_property('Day%i.FanartCode'         % count, weathercode)
         if count == MAXDAYS:
@@ -457,8 +457,8 @@ def daily_props(data):
         else:
             set_property('Daily.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('Daily.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('Daily.%i.Outlook'         % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('description','')), string.capwords(item['weather'][0].get('description',''))))
-        set_property('Daily.%i.ShortOutlook'    % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('main','')), string.capwords(item['weather'][0].get('main',''))))
+        set_property('Daily.%i.Outlook'         % (count+1), FORECAST.get(item['weather'][0].get('description',''), item['weather'][0].get('description','')))
+        set_property('Daily.%i.ShortOutlook'    % (count+1), FORECAST.get(item['weather'][0].get('main',''), item['weather'][0].get('main','')))
         set_property('Daily.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('Daily.%i.FanartCode'      % (count+1), weathercode)
         set_property('Daily.%i.WindDirection'   % (count+1), xbmc.getLocalizedString(int(round(WIND_DIR(item['deg'])))))
@@ -532,8 +532,8 @@ def daily_props(data):
             else:
                 set_property('Weekend.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
                 set_property('Weekend.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-            set_property('Weekend.%i.Outlook'         % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('description','')), string.capwords(item['weather'][0].get('description',''))))
-            set_property('Weekend.%i.ShortOutlook'    % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('main','')), string.capwords(item['weather'][0].get('main',''))))
+            set_property('Weekend.%i.Outlook'         % (count+1), FORECAST.get(item['weather'][0].get('description',''), item['weather'][0].get('description','')))
+            set_property('Weekend.%i.ShortOutlook'    % (count+1), FORECAST.get(item['weather'][0].get('main',''), item['weather'][0].get('main','')))
             set_property('Weekend.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
             set_property('Weekend.%i.FanartCode'      % (count+1), weathercode)
             set_property('Weekend.%i.WindDirection'   % (count+1), xbmc.getLocalizedString(int(round(WIND_DIR(item['deg'])))))
@@ -605,8 +605,8 @@ def daily_props(data):
         else:
             set_property('36Hour.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('36Hour.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('36Hour.%i.Outlook'         % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('description','')), string.capwords(item['weather'][0].get('description',''))))
-        set_property('36Hour.%i.ShortOutlook'    % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('main','')), string.capwords(item['weather'][0].get('main',''))))
+        set_property('36Hour.%i.Outlook'         % (count+1), FORECAST.get(item['weather'][0].get('description',''), item['weather'][0].get('description','')))
+        set_property('36Hour.%i.ShortOutlook'    % (count+1), FORECAST.get(item['weather'][0].get('main',''), item['weather'][0].get('main','')))
         set_property('36Hour.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('36Hour.%i.FanartCode'      % (count+1), weathercode)
         set_property('36Hour.%i.WindDirection'   % (count+1), xbmc.getLocalizedString(int(round(WIND_DIR(item['deg'])))))
@@ -680,8 +680,8 @@ def hourly_props(data, daynum):
         else:
             set_property('Hourly.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
             set_property('Hourly.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-        set_property('Hourly.%i.Outlook'         % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('description','')), string.capwords(item['weather'][0].get('description',''))))
-        set_property('Hourly.%i.ShortOutlook'    % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('main','')), string.capwords(item['weather'][0].get('main',''))))
+        set_property('Hourly.%i.Outlook'         % (count+1), FORECAST.get(item['weather'][0].get('description',''), item['weather'][0].get('description','')))
+        set_property('Hourly.%i.ShortOutlook'    % (count+1), FORECAST.get(item['weather'][0].get('main',''), item['weather'][0].get('main','')))
         set_property('Hourly.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
         set_property('Hourly.%i.FanartCode'      % (count+1), weathercode)
         set_property('Hourly.%i.Humidity'        % (count+1), str(item['main'].get('humidity','')) + '%')
@@ -776,8 +776,8 @@ def hourly_props(data, daynum):
                 else:
                     set_property('36Hour.%i.LongDate'    % (count+1), get_month(item.get('dt',''), 'ml'))
                     set_property('36Hour.%i.ShortDate'   % (count+1), get_month(item.get('dt',''), 'ms'))
-                set_property('36Hour.%i.Outlook'         % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('description','')), string.capwords(item['weather'][0].get('description',''))))
-                set_property('36Hour.%i.ShortOutlook'    % (count+1), FORECAST.get(string.capwords(item['weather'][0].get('main','')), string.capwords(item['weather'][0].get('main',''))))
+                set_property('36Hour.%i.Outlook'         % (count+1), FORECAST.get(item['weather'][0].get('description',''), item['weather'][0].get('description','')))
+                set_property('36Hour.%i.ShortOutlook'    % (count+1), FORECAST.get(item['weather'][0].get('main',''), item['weather'][0].get('main','')))
                 set_property('36Hour.%i.OutlookIcon'     % (count+1), WEATHER_ICON % weathercode)
                 set_property('36Hour.%i.FanartCode'      % (count+1), weathercode)
                 set_property('36Hour.%i.Humidity'        % (count+1), str(item['main'].get('humidity','')) + '%')
