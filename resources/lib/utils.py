@@ -388,9 +388,9 @@ def SPEED(mps):
     elif SPEEDUNIT == 'm/min':
         speed = mps * 60
     elif SPEEDUNIT == 'ft/h':
-        speed = mps * 11810,88
+        speed = mps * 11810.88
     elif SPEEDUNIT == 'ft/min':
-        speed = mps * 196,84
+        speed = mps * 196.84
     elif SPEEDUNIT == 'ft/s':
         speed = mps * 3.281
     elif SPEEDUNIT == 'mph':
