@@ -1,5 +1,6 @@
 v4.0.0
 - remove simplejson support
+- fix potential error when forecast is None
 
 v3.2.4
 - fix capitalization

@@ -223,7 +223,7 @@ def forecast(loc,locid,locationdeg):
                 log('fatal, giving up')
                 clear()
                 return
-    if current_weather != '' and 'cod' in current_weather and not current_weather['cod'] == '404':
+    if current_weather and current_weather != '' and 'cod' in current_weather and not current_weather['cod'] == '404':
         current_props(current_weather,loc)
     else:
         clear()
@@ -235,7 +235,7 @@ def forecast(loc,locid,locationdeg):
         except:
             log('parsing station data failed')
             station_weather = ''
-        if station_weather != '' and not 'message' in station_weather:
+        if station_weather and station_weather != '' and not 'message' in station_weather:
             station_props(station_weather,loc)
     daily_data = get_data(daily_string, 'daily')
     log('daily data: %s' % daily_data)
@@ -245,7 +245,7 @@ def forecast(loc,locid,locationdeg):
         log('parsing daily data failed')
         daily_weather = ''
     daynum = ''
-    if daily_weather != '' and 'cod' in daily_weather and not daily_weather['cod'] == '404':
+    if daily_weather and daily_weather != '' and 'cod' in daily_weather and not daily_weather['cod'] == '404':
         daynum = daily_props(daily_weather)
     hourly_data = get_data(hourly_string, 'hourly')
     log('hourly data: %s' % hourly_data)
@@ -254,7 +254,7 @@ def forecast(loc,locid,locationdeg):
     except:
         log('parsing hourly data failed')
         hourly_weather = ''
-    if hourly_weather != '' and 'cod' in hourly_weather and not hourly_weather['cod'] == '404':
+    if hourly_weather and hourly_weather != '' and 'cod' in hourly_weather and not hourly_weather['cod'] == '404':
         hourly_props(hourly_weather, daynum)
 
 def station_props(data,loc):
