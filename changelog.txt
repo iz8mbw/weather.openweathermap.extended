@@ -1,3 +1,6 @@
+v4.0.1
+- fix bug when hourly wind is none
+
 v4.0.0
 - remove simplejson support
 - fix potential error when forecast is None
