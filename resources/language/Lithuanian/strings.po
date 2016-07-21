@@ -26,11 +26,11 @@ msgstr "Vietovės nustatymas"
 
 msgctxt "#32102"
 msgid "Advanced"
-msgstr "Pažangus"
+msgstr "Papildomi"
 
 msgctxt "#32103"
 msgid "Expert"
-msgstr "Ekspertas"
+msgstr "Ekspertams"
 
 msgctxt "#32111"
 msgid "Location 1"
@@ -74,7 +74,7 @@ msgstr "Vietovės 5 ID"
 
 msgctxt "#32121"
 msgid "Show lat/lon when searching locations"
-msgstr "Rodyti plat./ilg., kai ieškoma vietovių"
+msgstr "Rodyti platumą/ilgumą ieškant vietovių"
 
 msgctxt "#32122"
 msgid "Weekend"
@@ -122,11 +122,11 @@ msgstr "ir įveskite jį priedo nustatymuose"
 
 msgctxt "#32133"
 msgid "or disable this addon."
-msgstr "arba išjunkite šį priedą"
+msgstr "arba išjunkite šį priedą."
 
 msgctxt "#32134"
 msgid "Recommended: get an api key at: http://openweathermap.org/appid"
-msgstr "Rekomenduojama gauti API raktą: http://openweathermap.org/appid"
+msgstr "Rekomenduojama gauti API raktą iš http://openweathermap.org/appid"
 
 #empty strings from id 32135 to 32200
 
