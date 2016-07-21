@@ -212,7 +212,7 @@ msgstr "Lengvas lietus"
 
 msgctxt "#32221"
 msgid "Moderate rain"
-msgstr "Nepastovus lietus"
+msgstr "Nedidelis lietus"
 
 msgctxt "#32222"
 msgid "Heavy intensity rain"
@@ -388,7 +388,7 @@ msgstr "Švelnus vėjas"
 
 msgctxt "#32265"
 msgid "Moderate breeze"
-msgstr "Nepastovus vėjas"
+msgstr "Nedidelis vėjas"
 
 msgctxt "#32266"
 msgid "Fresh breeze"
