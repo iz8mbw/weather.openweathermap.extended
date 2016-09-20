@@ -172,7 +172,7 @@ msgstr "Perkūnija su stipria dulksna"
 
 msgctxt "#32211"
 msgid "Light intensity drizzle"
-msgstr "Mažo intensyvumo dulksna"
+msgstr "Lengva dulksna"
 
 msgctxt "#32212"
 msgid "Drizzle"
@@ -180,11 +180,11 @@ msgstr "Dulksna"
 
 msgctxt "#32213"
 msgid "Heavy intensity drizzle"
-msgstr "Didelio intensyvumo dulksna"
+msgstr "Smarki dulksna"
 
 msgctxt "#32214"
 msgid "Light intensity drizzle rain"
-msgstr "Mažo intensyvumo dulkiantis lietus"
+msgstr "Lengvas dulkiantis lietus"
 
 msgctxt "#32215"
 msgid "Drizzle rain"
@@ -192,7 +192,7 @@ msgstr "Dulkiantis lietus"
 
 msgctxt "#32216"
 msgid "Heavy intensity drizzle rain"
-msgstr "Didelio intensyvumo dulkiantis lietus"
+msgstr "Smarkus dulkiantis lietus"
 
 msgctxt "#32217"
 msgid "Shower rain and drizzle"
@@ -216,11 +216,11 @@ msgstr "Nedidelis lietus"
 
 msgctxt "#32222"
 msgid "Heavy intensity rain"
-msgstr "Didelio intensyvumo lietus"
+msgstr "Smarkus lietus"
 
 msgctxt "#32223"
 msgid "Very heavy rain"
-msgstr "Labai stiprus lietus"
+msgstr "Labai smarkus lietus"
 
 msgctxt "#32224"
 msgid "Extreme rain"
@@ -232,7 +232,7 @@ msgstr "Stingdantis lietus"
 
 msgctxt "#32226"
 msgid "Light intensity shower rain"
-msgstr "Mažo intensyvumo lietus"
+msgstr "Lengvas lietus"
 
 msgctxt "#32227"
 msgid "Shower rain"
@@ -240,7 +240,7 @@ msgstr "Lietus"
 
 msgctxt "#32228"
 msgid "Heavy intensity shower rain"
-msgstr "Didelio intensyvumo lietus"
+msgstr "Smarkus lietus"
 
 msgctxt "#32229"
 msgid "Ragged shower rain"
@@ -328,7 +328,7 @@ msgstr "Tornadas"
 
 msgctxt "#32250"
 msgid "Clear sky"
-msgstr "Giedras dangus"
+msgstr "Giedra"
 
 msgctxt "#32251"
 msgid "Few clouds"
