@@ -24,6 +24,7 @@ LATLON         = ADDON.getSetting('LatLon')
 WEEKEND        = ADDON.getSetting('Weekend')
 STATION        = ADDON.getSetting('Station')
 MAP            = ADDON.getSetting('Map')
+ZOOM           = str(int(ADDON.getSetting('Zoom')) + 2)
 WEATHER_ICON   = xbmc.translatePath('%s.png').decode("utf-8")
 DATEFORMAT     = xbmc.getRegion('dateshort')
 TIMEFORMAT     = xbmc.getRegion('meridiem')
@@ -179,7 +180,7 @@ def forecast(loc,locid,locationdeg):
     if MAP == 'true' and xbmc.getCondVisibility('System.HasAddon(script.openweathermap.maps)'):
         lat = float(eval(locationdeg)[0])
         lon = float(eval(locationdeg)[1])
-        xbmc.executebuiltin('XBMC.RunAddon(script.openweathermap.maps,lat=%s&lon=%s)' % (lat, lon))
+        xbmc.executebuiltin('XBMC.RunAddon(script.openweathermap.maps,lat=%s&lon=%s&zoom=%s)' % (lat, lon, ZOOM))
     else:
         set_property('Map.IsFetched', '')
         for count in range (1, 6):
