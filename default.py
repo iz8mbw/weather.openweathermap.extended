@@ -134,6 +134,19 @@ def get_month(stamp, form):
         label = xbmc.getLocalizedString(MONTH_NAME_LONG[month]) + ' ' + day
     return label
 
+def geoip():
+    try:
+        req = urllib2.urlopen('http://freegeoip.net/json/')
+        response = req.read()
+        req.close()
+    except:
+        response = ''
+    if response:
+        data = json.loads(response)
+        if data and data.has_key('city') and data.has_key('country_code'):
+            city, country = data['city'], data['country_code']
+            return '%s,%s' % (city, country)
+
 def location(locstr):
     locs    = []
     locids  = []
@@ -897,18 +910,25 @@ if sys.argv[1].startswith('Location'):
         else:
             dialog.ok(ADDONNAME, xbmc.getLocalizedString(284))
 else:
-    location = ADDON.getSetting('Location%s' % sys.argv[1])
+    locationname = ADDON.getSetting('Location%s' % sys.argv[1])
     locationid = ADDON.getSetting('Location%sID' % sys.argv[1])
     locationdeg = ADDON.getSetting('Location%sdeg' % sys.argv[1])
     if (locationid == '') and (sys.argv[1] != '1'):
-        location = ADDON.getSetting('Location1')
+        locationname = ADDON.getSetting('Location1')
         locationid = ADDON.getSetting('Location1ID')
         locationdeg = ADDON.getSetting('Location1deg')
         log('trying location 1 instead')
+    if locationid == '':
+        log('fallback to geoip')
+        locationstring = geoip()
+        locations, locationids, locationdeg = location(locationstring.encode("utf-8"))
+        ADDON.setSetting('Location1', locations[0].split(' - ')[0])
+        ADDON.setSetting('Location1ID', str(locationids[0]))
+        ADDON.setSetting('Location1deg', str(locationdeg[0]))
     if not locationid == '':
         ADDON.setSetting('oldloc', str(locationid))
         ADDON.setSetting('oldtime', str(int(time.time())))
-        forecast(location, locationid, locationdeg)
+        forecast(locationname, locationid, locationdeg)
     else:
         log('no location provided')
         clear()
