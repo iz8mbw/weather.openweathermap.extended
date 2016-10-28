@@ -925,6 +925,7 @@ else:
         ADDON.setSetting('Location1', locations[0].split(' - ')[0])
         ADDON.setSetting('Location1ID', str(locationids[0]))
         ADDON.setSetting('Location1deg', str(locationdeg[0]))
+        locationid = str(locationids[0])
     if not locationid == '':
         ADDON.setSetting('oldloc', str(locationid))
         ADDON.setSetting('oldtime', str(int(time.time())))
