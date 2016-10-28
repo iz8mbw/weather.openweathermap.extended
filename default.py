@@ -141,6 +141,7 @@ def geoip():
         req.close()
     except:
         response = ''
+        log('failed to retrieve geoip location')
     if response:
         data = json.loads(response)
         if data and data.has_key('city') and data.has_key('country_code'):
@@ -921,11 +922,12 @@ else:
     if locationid == '':
         log('fallback to geoip')
         locationstring = geoip()
-        locations, locationids, locationdeg = location(locationstring.encode("utf-8"))
-        ADDON.setSetting('Location1', locations[0].split(' - ')[0])
-        ADDON.setSetting('Location1ID', str(locationids[0]))
-        ADDON.setSetting('Location1deg', str(locationdeg[0]))
-        locationid = str(locationids[0])
+        if locationstring:
+            locations, locationids, locationdeg = location(locationstring.encode("utf-8"))
+            ADDON.setSetting('Location1', locations[0].split(' - ')[0])
+            ADDON.setSetting('Location1ID', str(locationids[0]))
+            ADDON.setSetting('Location1deg', str(locationdeg[0]))
+            locationid = str(locationids[0])
     if not locationid == '':
         ADDON.setSetting('oldloc', str(locationid))
         ADDON.setSetting('oldtime', str(int(time.time())))
